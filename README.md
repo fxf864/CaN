@@ -30,7 +30,7 @@ Python 3.10+ and PyTorch 2.x are recommended. A CUDA-enabled GPU is recommended 
 
 ## Data Format
 
-The datasets are not distributed with this repository; please obtain them from their original public sources.
+The datasets need to be obtained from their original public sources.
 
 ### Node attributes
 
