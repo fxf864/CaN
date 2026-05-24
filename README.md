@@ -14,6 +14,7 @@ CaN/
 │   ├── models.py
 │   ├── training.py
 │   └── utils.py
+├── datasets/
 ├── evaluation.py
 ├── run_can.py
 ├── requirements.txt
@@ -60,13 +61,13 @@ The hyperedge file should contain one hyperedge per line. Each line lists only t
 ```bash
 python run_can.py \
   --mode train \
-  --attr_path data/attribute.txt \
-  --edge_path data/hyperedge.txt \
-  --out_edge_path out/generated_edges.txt \
+  --attr_path datasets/cora_coauth/attribute.txt \
+  --edge_path datasets/cora_coauth/hyperedge.txt \
+  --out_edge_path out/cora_coauth/generated_edges.txt \
   --epoch_node 1000 \
   --epoch_member 1000 \
   --member_steps_per_epoch 20 \
-  --model_path out/can_model.pt
+  --model_path out/cora_coauth/can_model.pt
 ```
 
 The refactored training flow keeps the original logic: it first trains the structural feature allocator and dynamic member assignment model, then trains the hyperedge structural predictor, saves a checkpoint, and generates one verification sample.
@@ -76,9 +77,9 @@ The refactored training flow keeps the original logic: it first trains the struc
 ```bash
 python run_can.py \
   --mode gen \
-  --attr_path data/attribute.txt \
+  --attr_path datasets/cora_coauth/attribute.txt \
   --model_path out/can_model.pt \
-  --out_edge_path out/generated_edges.txt \
+  --out_edge_path out/cora_coauth/generated_edges.txt \
   --num_samples 5
 ```
 
@@ -90,7 +91,7 @@ The evaluation script reports the structure--attribute consistency metrics used 
 
 ```bash
 python evaluation.py \
-  --gt_structure data/hyperedge.txt \
-  --gt_attribute data/attribute.txt \
-  --gen_structure out/generated_edges.txt
+  --gt_structure datasets/cora_coauth/hyperedge.txt \
+  --gt_attribute datasets/cora_coauth/attribute.txt \
+  --gen_structure out/cora_coauth/generated_edges.txt
 ```
